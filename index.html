@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
 <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1.3.0/dist/aframe-master.min.js"></script>
-<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+
+<!--<script src='https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js'></script>-->
+<script src='../../../../aframe/build/aframe-ar-nft.js'></script>
 
 <script>
     window.onload = function() {
@@ -20,10 +15,10 @@
                     this.vid.play();
                 }.bind(this));
 
-                marker.addEventListener('markerLost', function() {
-                    this.vid.pause();
-                    this.vid.currentTime = 0;
-                }.bind(this));
+		marker.addEventListener('markerLost', function() {
+			this.vid.pause();
+			this.vid.currentTime = 0;
+		}.bind(this));
             }
         });
     };
@@ -60,22 +55,26 @@
         embedded arjs='trackingMethod: best; sourceType: webcam; debugUIEnabled: false;'>
 
         <a-assets>
-            <video id="vid" autoplay loop="true" src="./assets/puri.mp4" crossorigin="anonymous" webkit-playsinline playsinline></video>
+            <video src="./assets/puri.mp4"
+                preload="auto" id="vid" response-type="arraybuffer" loop
+                crossorigin webkit-playsinline autoplay muted playsinline>
+            </video>
         </a-assets>
 
         <a-nft
             videohandler
             type='nft' url='./assets/marker.patt'
-            smooth="true" smoothCount="10" smoothTolerance="0.01" smoothThreshold="5">
+            smooth="true" smoothCount="10" smoothTolerance="0.01" smoothThreshold="5"
+        >
             <a-video
                 src="#vid"
-                position='0 0 0'
-                rotation='0 0 0'
-                width='1.92'
-                height='1.08'>
+                position='50 150 -100'
+                rotation='90 0 180'
+                width='300'
+                height='175'
+                >
             </a-video>
         </a-nft>
-        <a-entity camera></a-entity>
-    </a-scene>
+		<a-entity camera></a-entity>
+	</a-scene>
 </body>
-</html>
